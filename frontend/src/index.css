@@ -1,0 +1,254 @@
+:root {
+  --amarelo: #F7E30A;
+  --preto: #0A0A0B;
+  --fundo: #F2F2EF;
+  --texto: #111111;
+  --linha: #DDDDDB;
+  --branco: #FFFFFF;
+  --ok: #167A42;
+  --erro: #C5221F;
+  --fonte: 'Sora', system-ui, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: var(--fonte);
+  background: var(--fundo);
+  color: var(--texto);
+}
+
+/* Rótulo pequeno em caixa alta, com losango (marca do Lumak) */
+.rotulo {
+  font-family: var(--mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.rotulo::before { content: '◆ '; }
+
+.campo {
+  display: block;
+  width: 100%;
+  margin-top: 6px;
+  padding: 12px 14px;
+  border: 1px solid var(--preto);
+  border-radius: 0;
+  background: var(--branco);
+  font: inherit;
+  font-size: 16px;
+}
+.campo:focus { outline: 3px solid var(--amarelo); }
+
+.btn {
+  width: 100%;
+  padding: 14px 18px;
+  border: 1px solid var(--preto);
+  border-radius: 0;
+  background: var(--amarelo);
+  color: var(--preto);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+.btn:hover:not(:disabled) { background: var(--preto); color: var(--amarelo); }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.btn-sec {
+  padding: 8px 14px;
+  border: 1px solid currentColor;
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.erro { margin: 0; color: var(--erro); font-size: 14px; }
+
+.tela-centro { min-height: 100vh; display: grid; place-items: center; padding: 24px; }
+
+.cartao {
+  width: 100%;
+  max-width: 400px;
+  display: grid;
+  gap: 16px;
+  padding: 32px;
+  border: 1px solid var(--preto);
+  background: var(--branco);
+}
+.cartao h1 { margin: 0; font-size: 24px; }
+
+.marca { color: var(--amarelo); font-weight: 700; letter-spacing: 0.04em; }
+
+.topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+  background: var(--preto);
+  color: var(--branco);
+}
+/* ---------- tela de venda ---------- */
+#root { height: 100vh; display: flex; flex-direction: column; }
+
+.venda {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  grid-template-rows: minmax(0, 1fr);
+  gap: 24px;
+  padding: 24px;
+}
+
+.venda-esq { display: flex; flex-direction: column; gap: 12px; min-height: 0; }
+.campo-codigo { font-family: var(--mono); font-size: 22px; }
+
+.lista {
+  flex: 1;
+  overflow-y: auto;
+  border: 1px solid var(--preto);
+  background: var(--branco);
+}
+.vazio { padding: 48px; text-align: center; color: #777; }
+
+.itens { width: 100%; border-collapse: collapse; }
+.itens th {
+  position: sticky;
+  top: 0;
+  padding: 10px 12px;
+  background: var(--preto);
+  color: var(--branco);
+  text-align: left;
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.itens td { padding: 12px; border-bottom: 1px solid var(--linha); }
+.itens .num { text-align: right; font-family: var(--mono); }
+.itens th.num { font-family: var(--mono); }
+
+.qtd { display: inline-flex; align-items: center; gap: 10px; }
+.qtd button, .remover {
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--preto);
+  border-radius: 0;
+  background: var(--branco);
+  font: inherit;
+  cursor: pointer;
+}
+.qtd button:hover, .remover:hover { background: var(--amarelo); }
+
+.atalhos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: #555;
+}
+
+.venda-dir {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 24px;
+  background: var(--preto);
+  color: var(--branco);
+}
+.total {
+  font-family: var(--mono);
+  font-size: 44px;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--amarelo);
+}
+.ultimo {
+  display: grid;
+  gap: 4px;
+  margin-top: auto;
+  padding: 16px 0;
+  border-top: 1px solid #333;
+}
+.aviso { color: var(--amarelo); font-family: var(--mono); font-size: 12px; }
+/* ---------- tela de pagamento ---------- */
+.modal-fundo {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(10, 10, 11, 0.7);
+}
+.modal {
+  display: grid;
+  gap: 16px;
+  width: 100%;
+  max-width: 480px;
+  padding: 32px;
+  border: 1px solid var(--preto);
+  background: var(--branco);
+}
+.total-pagar { font-family: var(--mono); font-size: 48px; font-weight: 700; }
+.total-ok { font-family: var(--mono); font-size: 40px; font-weight: 700; }
+
+.formas { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.forma {
+  padding: 12px 8px;
+  border: 1px solid var(--preto);
+  border-radius: 0;
+  background: var(--branco);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+.forma.ativa { background: var(--amarelo); }
+.forma kbd {
+  margin-right: 4px;
+  padding: 0 5px;
+  border: 1px solid currentColor;
+  font-family: var(--mono);
+  font-size: 11px;
+}
+
+.troco { font-family: var(--mono); font-size: 32px; font-weight: 700; color: var(--ok); }
+.faltam { font-family: var(--mono); font-size: 24px; font-weight: 700; color: var(--erro); }
+.nota { margin: 0; padding: 12px; background: var(--fundo); font-size: 14px; }
+.aviso-est { margin: 0; padding: 8px 12px; background: var(--amarelo); font-size: 14px; }
+
+.acoes { display: grid; grid-template-columns: 1fr 2fr; gap: 8px; }
+/* ---------- busca, fechamento, cancelamento ---------- */
+.ok { margin: 0; color: var(--ok); font-size: 14px; font-weight: 600; }
+.sobram { font-family: var(--mono); font-size: 24px; font-weight: 700; color: #B45309; }
+.modal-largo { max-width: 640px; }
+
+.resultados { margin: 0; padding: 0; list-style: none; max-height: 320px; overflow-y: auto; }
+.resultados li {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 16px;
+  padding: 12px;
+  border-bottom: 1px solid var(--linha);
+  cursor: pointer;
+}
+.resultados li.sel { background: var(--amarelo); }
+.resultados .est { align-self: center; font-family: var(--mono); font-size: 12px; color: #555; }
+.resultados .num { font-family: var(--mono); font-weight: 700; }
+
+.resumo { display: grid; gap: 4px; }
+.resumo > div {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--linha);
+  font-family: var(--mono);
+  font-size: 14px;
+}
